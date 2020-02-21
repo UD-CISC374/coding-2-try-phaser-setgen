@@ -26,12 +26,12 @@
     "starter"
   ],
   "author": {
-    "name": "Austin Cory Bart",
-    "url": "https://github.com/acbart"
+    "name": "Steven Etgen",
+    "url": "https://github.com/setgen"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/acbart/educational-phaser-game-template.git"
+    "url": "https://github.com/UD-CISC374/coding-2-try-phaser-setgen.git"
   },
   "template": {
     "name": "educational-phaser-game-template",
