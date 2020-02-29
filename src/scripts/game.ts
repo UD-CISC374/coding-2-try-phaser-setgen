@@ -3,14 +3,14 @@ import MainScene from './scenes/mainScene';
 import PreloadScene from './scenes/preloadScene';
 import GameConfig = Phaser.Types.Core.GameConfig;
 
-const DEFAULT_WIDTH = <number> 400;
-const DEFAULT_HEIGHT = <number> 400;
+const DEFAULT_WIDTH = <number>400;
+const DEFAULT_HEIGHT = <number>400;
 
 
 const config: GameConfig = {
     backgroundColor: '#ffffff',
-    width: DEFAULT_WIDTH,
-    height: DEFAULT_HEIGHT,
+    width: this.DEFAULT_WIDTH,
+    height: this.DEFAULT_HEIGHT,
     scale: {
         parent: 'phaser-game',
         mode: Phaser.Scale.FIT,
