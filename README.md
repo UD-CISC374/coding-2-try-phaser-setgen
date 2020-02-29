@@ -22,4 +22,4 @@ You should create the following files:
 
 * [config/pwa/icons/icons-192.png](config/pwa/icons/icons-192.png): This is a 192x192 pixel version of your game's icon.
 * [config/pwa/icons/icons-512.png](config/pwa/icons/icons-512.png): This is a 512x512 pixel version of your game's icon.
-* [src/favicon.ico](src/favicon/ico): The Favicon for your game.
+* [src/favicon.ico](src/favicon.ico): The Favicon for your game.
