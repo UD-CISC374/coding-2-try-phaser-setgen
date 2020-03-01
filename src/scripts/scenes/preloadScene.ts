@@ -1,4 +1,5 @@
 export default class PreloadScene extends Phaser.Scene {
+
     constructor() {
     super({ key: 'PreloadScene' });
   }
@@ -31,7 +32,17 @@ export default class PreloadScene extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 24
     });
+    this.load.spritesheet("beam", "./assets/spritesheets/beam.png",{
+      frameWidth: 16,
+      frameHeight: 16
+    });
 
+    this.load.bitmapFont("pixelFont", "./assets/font/font.png", "./assets/font/font.xml");
+
+    this.load.audio("audio_beam", ["./assets/sounds/beam.ogg", "./assets/sounds/beam.mp3"]);
+    this.load.audio("audio_explosion", ["./assets/sounds/explosion.ogg", "./assets/sounds/explosion.mp3"]);
+    this.load.audio("audio_pickup", ["./assets/sounds/pickup.ogg", "./assets/sounds/pickup.mp3"]);
+    this.load.audio("music", ["./assets/sounds/sci-fi_platformer12.ogg", "./assets/sounds/sci-fi_platformer12.mp3"]);
   }
 
   create() {
@@ -97,10 +108,18 @@ export default class PreloadScene extends Phaser.Scene {
         frameRate: 20,
         repeat: -1
       });
-
       this.anims.create({
         key: "thurst",
         frames: this.anims.generateFrameNumbers("player", {
+          start: 0,
+          end: 1
+        }),
+        frameRate: 20,
+        repeat: -1,
+      });
+      this.anims.create({
+        key: "beam_anim",
+        frames: this.anims.generateFrameNumbers("beam", {
           start: 0,
           end: 1
         }),
