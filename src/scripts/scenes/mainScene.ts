@@ -1,4 +1,7 @@
 import ExampleObject from '../objects/exampleObject';
+import {config} from '../game'
+import {gameSettings} from '../game'
+import { Input } from 'phaser';
 
 
 export default class MainScene extends Phaser.Scene {
@@ -8,101 +11,55 @@ export default class MainScene extends Phaser.Scene {
   ship3: Phaser.GameObjects.Sprite;
   config: Phaser.Types.Core.GameConfig;
   powerUps: any;
-  temp_width: number;
-  temp_height: number;
+  width: number;
+  height: number;
+  mainCam: Phaser.Cameras.Scene2D.Camera;
+  player: Phaser.Physics.Arcade.Sprite;
+  cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
+  spacebar: Phaser.Input.Keyboard.Key;
+  game: Phaser.Game;
 
     constructor() {
       super({ key: 'MainScene' });
-      this.temp_width = 400;
-      this.temp_height = 400;
+      this.width = this.width;
+      this.width = Number(config.scale?.width);
+      this.height = Number(config.scale?.height)
+      
     }
   
     create() {
   
-      //this.background = this.add.tileSprite(0, 0, this.temp_width, this.temp_height, "background");
-      this.background = this.add.tileSprite(0, 0, this.temp_width, this.temp_height, "background");
+      //this.background = this.add.tileSprite(0, 0, this.width, this.height, "background");
+      this.background = this.add.tileSprite(0, 0, this.width, this.height, "background");
       this.background.setOrigin(0, 0);
+      this.background.setScrollFactor(0);
 
-      this.ship1 = this.add.sprite(this.temp_width / 2 - 50, this.temp_height / 2, "ship");
-      this.ship2 = this.add.sprite(this.temp_width / 2, this.temp_height / 2, "ship2");
-      this.ship3 = this.add.sprite(this.temp_width / 2 + 50, this.temp_height / 2, "ship3");
+      // this.mainCam = this.cameras.main.startFollow(this.player);
+      // this.background.tilePositionX = this.mainCam.scrollX * .3;
+
+      this.ship1 = this.add.sprite(this.width / 2 - 50, this.height / 2, "ship");
+      this.ship2 = this.add.sprite(this.width / 2, this.height / 2, "ship2");
+      this.ship3 = this.add.sprite(this.width / 2 + 50, this.height / 2, "ship3");
   
   
-      // this.anims.create({
-      //   key: "ship1_anim",
-      //   frames: this.anims.generateFrameNumbers("ship", {
-      //     start: 2,
-      //     end: 3
-      //   }),
-      //   frameRate: 20,
-      //   repeat: -1
-      // });
-      // this.anims.create({
-      //   key: "ship2_anim",
-      //   frames: this.anims.generateFrameNumbers("ship2", {
-      //     start: 2,
-      //     end: 3
-      //   }),
-      //   frameRate: 20,
-      //   repeat: -1
-      // });
-      // this.anims.create({
-      //   key: "ship3_anim",
-      //   frames: this.anims.generateFrameNumbers("ship3", {
-      //     start: 2,
-      //     end: 3
-      //   }),
-      //   frameRate: 20,
-      //   repeat: -1
-      // });
+      
   
-      // this.anims.create({
-      //   key: "explode",
-      //   frames: this.anims.generateFrameNumbers("explosion", {
-      //     start: 2,
-      //     end: 3
-      //   }),
-      //   frameRate: 20,
-      //   repeat: 0,
-      //   hideOnComplete: true
-      // });
+      this.ship1.play("ship1_anim");
+      this.ship2.play("ship2_anim");
+      this.ship3.play("ship3_anim");
   
-      // this.ship1.play("ship1_anim");
-      // this.ship2.play("ship2_anim");
-      // this.ship3.play("ship3_anim");
+      this.ship1.setInteractive();
+      this.ship2.setInteractive();
+      this.ship3.setInteractive();
   
-      // this.ship1.setInteractive();
-      // this.ship2.setInteractive();
-      // this.ship3.setInteractive();
-  
-      // this.input.on('gameobjectdown', this.destroyShip, this);
+      this.input.on('gameobjectdown', this.destroyShip, this);
   
       this.add.text(20, 20, "Playing game", {
         font: "25px Arial",
         fill: "yellow"
       });
   
-      // POWER UPS
-  
-      //2.1 Two Animations for the power ups
-      this.anims.create({
-        key: "red",
-        frames: this.anims.generateFrameNumbers("power-up", {
-          start: 0,
-          end: 1
-        }),
-        frameRate: 20,
-        repeat: -1
-      });
-      this.anims.create({
-        key: "gray",
-        frames: this.anims.generateFrameNumbers("power-up", {
-          start: 2,
-          end: 3
-        }),
-        frameRate: 20,
-        repeat: -1
-      });
+      
   
       // 3.1
       this.physics.world.setBoundsCollision();
@@ -131,6 +88,13 @@ export default class MainScene extends Phaser.Scene {
        powerUp.setBounce(1);
   
       }
+
+      this.player = this.physics.add.sprite(this.width / 2 - 8, this.height -64, "player");
+      this.player.play("thrust");
+      this.cursorKeys = this.input.keyboard.createCursorKeys();
+      this.player.setCollideWorldBounds(true);
+
+      this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
   
     }
   
@@ -141,19 +105,41 @@ export default class MainScene extends Phaser.Scene {
       this.moveShip(this.ship3, 3);
   
       this.background.tilePositionY -= 0.5;
+
+      this.movePlayerManager();
+
+      if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
+        console.log("Fire!");
+      }
   
+    }
+
+    movePlayerManager(){
+      if(this.cursorKeys.left?.isDown){
+        this.player.setVelocityX(-gameSettings.playerSpeed);
+      }
+      else if(this.cursorKeys.right?.isDown){
+        this.player.setVelocityX(gameSettings.playerSpeed);
+      }
+      
+      if(this.cursorKeys.up?.isDown){
+        this.player.setVelocityY(-gameSettings.playerSpeed);
+      }
+      else if(this.cursorKeys.down?.isDown){
+        this.player.setVelocityY(gameSettings.playerSpeed);
+      }
     }
   
     moveShip(ship, speed) {
       ship.y += speed;
-      if (ship.y > this.temp_height) {
+      if (ship.y > this.height) {
         this.resetShipPos(ship);
       }
     }
   
     resetShipPos(ship) {
       ship.y = 0;
-      var randomX = Phaser.Math.Between(0, this.temp_width);
+      var randomX = Phaser.Math.Between(0, this.width);
       ship.x = randomX;
     }
   

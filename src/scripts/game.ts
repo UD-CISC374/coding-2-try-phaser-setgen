@@ -2,15 +2,15 @@ import 'phaser';
 import MainScene from './scenes/mainScene';
 import PreloadScene from './scenes/preloadScene';
 import GameConfig = Phaser.Types.Core.GameConfig;
+export {config}
+export {gameSettings}
 
-const DEFAULT_WIDTH = <number>400;
-const DEFAULT_HEIGHT = <number>400;
+const DEFAULT_WIDTH: number = 400;
+const DEFAULT_HEIGHT : number = 400;
 
 
 const config: GameConfig = {
     backgroundColor: '#ffffff',
-    width: this.DEFAULT_WIDTH,
-    height: this.DEFAULT_HEIGHT,
     scale: {
         parent: 'phaser-game',
         mode: Phaser.Scale.FIT,
@@ -27,6 +27,10 @@ const config: GameConfig = {
         }
     }
 };
+
+const gameSettings = {
+    playerSpeed: 200,
+  }
 
 window.addEventListener('load', () => {
     window['game'] = new Phaser.Game(config);
