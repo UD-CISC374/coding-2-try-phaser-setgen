@@ -31,7 +31,6 @@ export default class MainScene extends Phaser.Scene {
 
     constructor() {
       super({ key: 'MainScene' });
-      this.width = this.width;
       this.width = Number(config.scale?.width);
       this.height = Number(config.scale?.height)
       
@@ -39,7 +38,6 @@ export default class MainScene extends Phaser.Scene {
   
     create() {
   
-      //this.background = this.add.tileSprite(0, 0, this.width, this.height, "background");
       this.background = this.add.tileSprite(0, 0, this.width, this.height, "background");
       this.background.setOrigin(0, 0);
       this.background.setScrollFactor(0);
@@ -100,7 +98,7 @@ export default class MainScene extends Phaser.Scene {
   
       }
 
-      this.player = this.physics.add.sprite(this.width / 2 - 8, this.height -64, "player");
+      this.player = this.physics.add.sprite(this.width / 2 - 8, this.height - 64, "player");
       this.player.play("thrust");
       this.cursorKeys = this.input.keyboard.createCursorKeys();
       this.player.setCollideWorldBounds(true);
@@ -159,9 +157,9 @@ export default class MainScene extends Phaser.Scene {
   
     update() {
   
-      this.moveShip(this.ship1, 1);
-      this.moveShip(this.ship2, 2);
-      this.moveShip(this.ship3, 3);
+      this.moveShip(this.ship1, 7);
+      this.moveShip(this.ship2, 9);
+      this.moveShip(this.ship3, 5);
   
       this.background.tilePositionY -= 0.5;
 

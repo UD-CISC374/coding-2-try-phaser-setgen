@@ -5,8 +5,8 @@ import GameConfig = Phaser.Types.Core.GameConfig;
 export {config}
 export {gameSettings}
 
-const DEFAULT_WIDTH: number = 400;
-const DEFAULT_HEIGHT : number = 400;
+const DEFAULT_WIDTH: number = 1500;
+const DEFAULT_HEIGHT : number = 1500;
 
 
 const config: GameConfig = {
@@ -30,7 +30,7 @@ const config: GameConfig = {
 };
 
 const gameSettings = {
-    playerSpeed: 200,
+    playerSpeed: 600,
   }
 
 window.addEventListener('load', () => {

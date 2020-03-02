@@ -8,16 +8,16 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("background", "./assets/images/background.png");
 
     this.load.spritesheet("ship", "./assets/spritesheets/ship.png",{
-      frameWidth: 16,
-      frameHeight: 16
+      frameWidth: 105,
+      frameHeight: 186
     });
     this.load.spritesheet("ship2", "./assets/spritesheets/ship2.png",{
-      frameWidth: 32,
-      frameHeight: 16
+      frameWidth: 89,
+      frameHeight: 165
     });
     this.load.spritesheet("ship3", "./assets/spritesheets/ship3.png",{
-      frameWidth: 32,
-      frameHeight: 32
+      frameWidth: 182,
+      frameHeight: 356
     });
     this.load.spritesheet("explosion", "./assets/spritesheets/explosion.png",{
       frameWidth: 16,
@@ -29,8 +29,8 @@ export default class PreloadScene extends Phaser.Scene {
       frameHeight: 16
     });
     this.load.spritesheet("player", "./assets/spritesheets/player.png",{
-      frameWidth: 16,
-      frameHeight: 24
+      frameWidth: 61,
+      frameHeight: 72
     });
     this.load.spritesheet("beam", "./assets/spritesheets/beam.png",{
       frameWidth: 16,
