@@ -1,6 +1,6 @@
 {
-  "short_name": "EdGame",
-  "name": "My Educational Phaser Game",
+  "short_name": "RocketGame",
+  "name": "Steve's Educational Phaser Game",
   "icons": [
     {
       "src": "./icons/icons-192.png",
