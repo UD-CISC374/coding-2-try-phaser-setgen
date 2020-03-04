@@ -1,8 +1,8 @@
 {
-  "name": "educational-phaser-game-template",
+  "name": "coding-2-try-phaser-setgen",
   "version": "0.0.1",
   "description": "A space shoot em up adventure! Shoot enemies and avoid the asteroids!",
-  "homepage": "https://github.com/acbart/educational-phaser-game-template#readme",
+  "homepage": "https://github.com/UD-CISC374/coding-2-try-phaser-setgen#readme",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config config/webpack.dev.js",
