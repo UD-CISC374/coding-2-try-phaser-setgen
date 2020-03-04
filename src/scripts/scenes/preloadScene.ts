@@ -1,7 +1,16 @@
+import { config } from "../game";
+
 export default class PreloadScene extends Phaser.Scene {
+  gameButton: Phaser.GameObjects.Sprite;
+  gameText: Phaser.GameObjects.Text;
+  width: number;
+  height: number;
+  splash: Phaser.GameObjects.TileSprite;
 
     constructor() {
     super({ key: 'PreloadScene' });
+    this.width = Number(config.scale?.width);
+    this.height = Number(config.scale?.height)
   }
 
   preload(){
@@ -35,6 +44,22 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.spritesheet("beam", "./assets/spritesheets/beam.png",{
       frameWidth: 16,
       frameHeight: 16
+    });
+    this.load.spritesheet("asteroid", "./assets/images/asteroid.png",{
+      frameWidth: 186,
+      frameHeight: 191
+    });
+    this.load.spritesheet("play1", "./assets/images/play1.png",{
+      frameWidth: 733,
+      frameHeight: 358
+    });
+    this.load.spritesheet("play2", "./assets/images/play2.png",{
+      frameWidth: 733,
+      frameHeight: 358
+    });
+    this.load.spritesheet("splash", "./assets/images/splash.png",{
+      frameWidth: 3000,
+      frameHeight: 1500
     });
 
     this.load.bitmapFont("pixelFont", "./assets/font/font.png", "./assets/font/font.xml");
@@ -126,8 +151,36 @@ export default class PreloadScene extends Phaser.Scene {
         frameRate: 20,
         repeat: -1,
       });
+
+      this.splash = this.add.tileSprite(this.width/2, this.height/2, 3000, 1500, "splash");
+
+      this.gameButton = this.add.sprite(100, 200, "play1").setInteractive();
+      this.centerButton(this.gameButton, 1);
       
-      this.scene.start('MainScene');
+      
+      this.gameButton.on('pointerdown', () => this.clickButton());
+
+      this.input.on('pointerover', function (event, gameObjects) {
+        gameObjects[0].setTexture("play2");
+      });
+       
+      this.input.on('pointerout', function (event, gameObjects) {
+        gameObjects[0].setTexture("play1");
+      });
+            
+      //this.scene.start('MainScene');
+  }
+
+
+  centerButton (gameObject, offset = 0) {
+    Phaser.Display.Align.In.Center(
+      gameObject,
+      this.add.zone(this.width/2, this.height/2 - offset * 100, this.width, this.height)
+    );
+  }
+
+  public clickButton() {
+    this.scene.start('MainScene');
   }
 
   // constructor() {
