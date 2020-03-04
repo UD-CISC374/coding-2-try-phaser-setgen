@@ -1,6 +1,6 @@
 {
-  "short_name": "RocketGame",
-  "name": "Steve's Educational Phaser Game",
+  "short_name": "Asteroid Shooter",
+  "name": "Asteroid Shooter",
   "icons": [
     {
       "src": "./icons/icons-192.png",

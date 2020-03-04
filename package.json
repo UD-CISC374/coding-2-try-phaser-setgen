@@ -1,7 +1,7 @@
 {
   "name": "educational-phaser-game-template",
   "version": "0.0.1",
-  "description": "Phaser 3 starter template for educational games, using TypeScript, webpack, and Github Pages.",
+  "description": "A space shoot em up adventure! Shoot enemies and avoid the asteroids!",
   "homepage": "https://github.com/acbart/educational-phaser-game-template#readme",
   "main": "index.js",
   "scripts": {
